@@ -96,15 +96,7 @@ class _Header extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.gold, width: 1.5),
-                ),
-                child: const Icon(AppIcons.scales, color: Colors.white, size: 22),
-              ),
+              const Emblem(size: 44, ringWidth: 1.5),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(

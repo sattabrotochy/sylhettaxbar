@@ -326,13 +326,30 @@ class Emblem extends StatelessWidget {
         border: Border.all(color: AppColors.gold, width: ringWidth),
       ),
       alignment: Alignment.center,
-      child: Container(
-        width: size * 0.81,
-        height: size * 0.81,
-        decoration:
-            const BoxDecoration(color: AppColors.primary, shape: BoxShape.circle),
-        child: Icon(AppIcons.scales, color: Colors.white, size: size * 0.42),
-      ),
+      child: AppLogo(size: size - ringWidth * 2 - size * 0.06),
+    );
+  }
+}
+
+/// The association's round seal on a white disc.
+class AppLogo extends StatelessWidget {
+  const AppLogo({super.key, this.size = 44});
+
+  static const asset = 'assets/images/logo.png';
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration:
+          const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+      child: Image.asset(asset,
+          width: size,
+          height: size,
+          semanticLabel: 'Sylhet District Taxes Bar Association',
+          cacheWidth: (size * 3).round()),
     );
   }
 }

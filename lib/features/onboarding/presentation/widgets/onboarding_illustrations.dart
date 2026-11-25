@@ -18,7 +18,9 @@ class _Panel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExcludeSemantics(
       child: Container(
-        height: 372,
+        // Minimum, not fixed: larger system font sizes make the content
+        // taller, and a fixed height would overflow.
+        constraints: const BoxConstraints(minHeight: 372),
         clipBehavior: Clip.antiAlias,
         decoration:
             BoxDecoration(color: color, borderRadius: BorderRadius.circular(28)),
@@ -28,6 +30,7 @@ class _Panel extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(22, 28, 22, 28),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: children,
               ),
@@ -303,7 +306,7 @@ class FormsIllustration extends StatelessWidget {
             ),
           ],
         ),
-        const Spacer(),
+        const SizedBox(height: 40),
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
