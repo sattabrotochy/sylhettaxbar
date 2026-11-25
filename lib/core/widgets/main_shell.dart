@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../features/settings/presentation/viewmodels/settings_view_model.dart';
 
 import '../theme/app_colors.dart';
 import 'app_icons.dart';
@@ -35,7 +38,7 @@ class _MainShellState extends State<MainShell> {
     final last = _lastBack;
     if (last == null || now.difference(last) > _exitWindow) {
       _lastBack = now;
-      final s = context.strings;
+      final s = context.read<SettingsViewModel>().strings;
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
@@ -54,7 +57,8 @@ class _MainShellState extends State<MainShell> {
   Future<bool> _confirmExit() async {
     if (_dialogOpen) return false;
     _dialogOpen = true;
-    final s = context.strings;
+    // Outside build: read without subscribing (watch would throw here).
+    final s = context.read<SettingsViewModel>().strings;
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
