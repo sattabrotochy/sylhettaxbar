@@ -136,6 +136,15 @@ class AppStrings {
   String appVersion(String v) => _t('App version $v', 'অ্যাপ সংস্করণ $v');
   String get comingSoon => _t('Coming soon', 'শীঘ্রই আসছে');
 
+  // Exit confirmation
+  String get pressBackAgainToExit =>
+      _t('Press back again to exit', 'বের হতে আবার ব্যাক চাপুন');
+  String get exitTitle => _t('Exit app', 'অ্যাপ থেকে বের হবেন');
+  String get exitMessage => _t('Are you sure you want to exit the app?',
+      'আপনি কি নিশ্চিত যে অ্যাপ থেকে বের হতে চান?');
+  String get yes => _t('Yes', 'হ্যাঁ');
+  String get no => _t('No', 'না');
+
   // About
   String get whoWeAre => _t('Who we are', 'আমরা কারা');
   String get whoWeAreBody => _t(
