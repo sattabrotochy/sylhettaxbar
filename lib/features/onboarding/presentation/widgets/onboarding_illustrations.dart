@@ -22,8 +22,10 @@ class _Panel extends StatelessWidget {
         // taller, and a fixed height would overflow.
         constraints: const BoxConstraints(minHeight: 372),
         clipBehavior: Clip.antiAlias,
-        decoration:
-            BoxDecoration(color: color, borderRadius: BorderRadius.circular(28)),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(28),
+        ),
         child: Stack(
           children: [
             ?decor,
@@ -43,11 +45,13 @@ class _Panel extends StatelessWidget {
 }
 
 Widget _bar(double w, double h, Color c) => Container(
-      width: w,
-      height: h,
-      decoration:
-          BoxDecoration(color: c, borderRadius: BorderRadius.circular(h / 2)),
-    );
+  width: w,
+  height: h,
+  decoration: BoxDecoration(
+    color: c,
+    borderRadius: BorderRadius.circular(h / 2),
+  ),
+);
 
 class DirectoryIllustration extends StatelessWidget {
   const DirectoryIllustration({super.key});
@@ -55,40 +59,48 @@ class DirectoryIllustration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.strings;
-    Widget row(Color avatar, double w1, double w2, Widget? trailing,
-            {bool faded = false}) =>
-        Container(
-          padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            color: faded ? Colors.white.withValues(alpha: 0.6) : Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: faded ? null : _shadow,
+    Widget row(
+      Color avatar,
+      double w1,
+      double w2,
+      Widget? trailing, {
+      bool faded = false,
+    }) => Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: faded ? Colors.white.withValues(alpha: 0.6) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: faded ? null : _shadow,
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(color: avatar, shape: BoxShape.circle),
+            child: faded
+                ? null
+                : const Icon(AppIcons.person, color: Colors.white, size: 24),
           ),
-          child: Row(
-            children: [
-              Container(
-                width: 46,
-                height: 46,
-                decoration: BoxDecoration(color: avatar, shape: BoxShape.circle),
-                child: faded
-                    ? null
-                    : const Icon(AppIcons.person, color: Colors.white, size: 24),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _bar(w1, 10, faded ? AppColors.textOnNavyMuted : AppColors.navy),
-                    const SizedBox(height: 7),
-                    _bar(w2, 8, AppColors.lineStrong),
-                  ],
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _bar(
+                  w1,
+                  10,
+                  faded ? AppColors.textOnNavyMuted : AppColors.navy,
                 ),
-              ),
-              ?trailing,
-            ],
+                const SizedBox(height: 7),
+                _bar(w2, 8, AppColors.lineStrong),
+              ],
+            ),
           ),
-        );
+          ?trailing,
+        ],
+      ),
+    );
 
     return _Panel(
       color: AppColors.line,
@@ -99,8 +111,9 @@ class DirectoryIllustration extends StatelessWidget {
           width: 180,
           height: 180,
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.lineStrong)),
+            shape: BoxShape.circle,
+            border: Border.all(color: AppColors.lineStrong),
+          ),
         ),
       ),
       children: [
@@ -108,18 +121,31 @@ class DirectoryIllustration extends StatelessWidget {
           height: 48,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: _shadow),
-          child: Row(children: [
-            const Icon(AppIcons.search, color: AppColors.primary, size: 20),
-            const SizedBox(width: 10),
-            Text(s.searchAdvocates,
-                style: const TextStyle(fontSize: 15, color: AppColors.textMuted)),
-          ]),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: _shadow,
+          ),
+          child: Row(
+            children: [
+              const Icon(AppIcons.search, color: AppColors.primary, size: 20),
+              const SizedBox(width: 10),
+              Text(
+                s.searchAdvocates,
+                style: const TextStyle(
+                  fontSize: 15,
+                  color: AppColors.textMuted,
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 12),
-        row(AppColors.primary, 120, 84, TagBadge(label: s.goldenMember, fontSize: 12)),
+        row(
+          AppColors.primary,
+          120,
+          84,
+          TagBadge(label: s.goldenMember, fontSize: 12),
+        ),
         const SizedBox(height: 12),
         row(
           AppColors.navy,
@@ -128,9 +154,15 @@ class DirectoryIllustration extends StatelessWidget {
           Container(
             width: 40,
             height: 40,
-            decoration:
-                const BoxDecoration(color: AppColors.line, shape: BoxShape.circle),
-            child: const Icon(AppIcons.phone, color: AppColors.primary, size: 18),
+            decoration: const BoxDecoration(
+              color: AppColors.line,
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              AppIcons.phone,
+              color: AppColors.primary,
+              size: 18,
+            ),
           ),
         ),
         const SizedBox(height: 12),
@@ -146,28 +178,42 @@ class NoticesIllustration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.strings;
-    Widget card(String tag, Color tagBg, Color tagFg, double w1, double w2,
-            {double indent = 0}) =>
-        Container(
-          margin: EdgeInsets.only(left: indent),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(16)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    Widget card(
+      String tag,
+      Color tagBg,
+      Color tagFg,
+      double w1,
+      double w2, {
+      double indent = 0,
+    }) => Container(
+      margin: EdgeInsets.only(left: indent),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Row(children: [
-                TagBadge(label: tag, background: tagBg, foreground: tagFg, fontSize: 12),
-                const Spacer(),
-                _bar(54, 8, AppColors.lineStrong),
-              ]),
-              const SizedBox(height: 9),
-              _bar(w1, 10, AppColors.navy),
-              const SizedBox(height: 9),
-              _bar(w2, 8, AppColors.lineStrong),
+              TagBadge(
+                label: tag,
+                background: tagBg,
+                foreground: tagFg,
+                fontSize: 12,
+              ),
+              const Spacer(),
+              _bar(54, 8, AppColors.lineStrong),
             ],
           ),
-        );
+          const SizedBox(height: 9),
+          _bar(w1, 10, AppColors.navy),
+          const SizedBox(height: 9),
+          _bar(w2, 8, AppColors.lineStrong),
+        ],
+      ),
+    );
 
     return _Panel(
       color: AppColors.navy,
@@ -178,43 +224,54 @@ class NoticesIllustration extends StatelessWidget {
           width: 240,
           height: 240,
           decoration: const BoxDecoration(
-              color: AppColors.navyDeep, shape: BoxShape.circle),
+            color: AppColors.navyDeep,
+            shape: BoxShape.circle,
+          ),
         ),
       ),
       children: [
-        Row(children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(
-                color: AppColors.primary, borderRadius: BorderRadius.circular(16)),
-            child: const Icon(AppIcons.bell, color: Colors.white, size: 26),
-          ),
-          const SizedBox(width: 12),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            _bar(110, 10, Colors.white),
-            const SizedBox(height: 6),
-            _bar(70, 8, const Color(0xFF46639E)),
-          ]),
-        ]),
+        Row(
+          children: [
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: const Icon(AppIcons.bell, color: Colors.white, size: 26),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _bar(110, 10, Colors.white),
+                const SizedBox(height: 6),
+                _bar(70, 8, const Color(0xFF46639E)),
+              ],
+            ),
+          ],
+        ),
         const SizedBox(height: 16),
         card(s.notice, AppColors.primary, Colors.white, 200, 160),
         const SizedBox(height: 12),
-        card(s.election, AppColors.gold, AppColors.navy, 170, 130, indent: 18),
+        card(s.news, AppColors.gold, AppColors.navy, 170, 130, indent: 18),
         const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(16)),
+            color: Colors.white.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(16),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TagBadge(
-                  label: s.news,
-                  background: AppColors.line,
-                  foreground: AppColors.navy,
-                  fontSize: 12),
+                label: s.news,
+                background: AppColors.line,
+                foreground: AppColors.navy,
+                fontSize: 12,
+              ),
               const SizedBox(height: 9),
               _bar(180, 10, Colors.white.withValues(alpha: 0.5)),
             ],
@@ -231,50 +288,70 @@ class FormsIllustration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.strings;
-    Widget doc(String label, Color bg, Color border, Color fg, double w1, double w2) =>
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(18),
-              boxShadow: _shadow),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 44,
-                height: 52,
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.only(bottom: 6),
-                decoration: BoxDecoration(
-                  color: bg,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: border, width: 1.5),
-                ),
-                child: Text(label,
-                    style: TextStyle(
-                        fontSize: 11, fontWeight: FontWeight.w800, color: fg)),
+    Widget doc(
+      String label,
+      Color bg,
+      Color border,
+      Color fg,
+      double w1,
+      double w2,
+    ) => Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: _shadow,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 44,
+            height: 52,
+            alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.only(bottom: 6),
+            decoration: BoxDecoration(
+              color: bg,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: border, width: 1.5),
+            ),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                color: fg,
               ),
-              const SizedBox(height: 10),
-              FractionallySizedBox(
-                  widthFactor: w1, child: _bar(double.infinity, 9, AppColors.navy)),
-              const SizedBox(height: 10),
-              FractionallySizedBox(
-                  widthFactor: w2,
-                  child: _bar(double.infinity, 8, AppColors.lineStrong)),
-              const SizedBox(height: 10),
-              Row(children: [
-                const Icon(AppIcons.download, size: 16, color: AppColors.primary),
-                const SizedBox(width: 6),
-                Text(s.download,
-                    style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.primary)),
-              ]),
+            ),
+          ),
+          const SizedBox(height: 10),
+          FractionallySizedBox(
+            widthFactor: w1,
+            child: _bar(double.infinity, 9, AppColors.navy),
+          ),
+          const SizedBox(height: 10),
+          FractionallySizedBox(
+            widthFactor: w2,
+            child: _bar(double.infinity, 8, AppColors.lineStrong),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              const Icon(AppIcons.download, size: 16, color: AppColors.primary),
+              const SizedBox(width: 6),
+              Text(
+                s.download,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
+                ),
+              ),
             ],
           ),
-        );
+        ],
+      ),
+    );
 
     return _Panel(
       color: AppColors.line,
@@ -285,8 +362,9 @@ class FormsIllustration extends StatelessWidget {
           width: 200,
           height: 200,
           decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.lineStrong)),
+            shape: BoxShape.circle,
+            border: Border.all(color: AppColors.lineStrong),
+          ),
         ),
       ),
       children: [
@@ -294,14 +372,27 @@ class FormsIllustration extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-                child: doc('PDF', AppColors.background, AppColors.primary,
-                    AppColors.primary, 0.9, 0.6)),
+              child: doc(
+                'PDF',
+                AppColors.background,
+                AppColors.primary,
+                AppColors.primary,
+                0.9,
+                0.6,
+              ),
+            ),
             const SizedBox(width: 12),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 22),
-                child: doc('FORM', AppColors.goldSoft, AppColors.gold,
-                    AppColors.goldText, 0.8, 0.55),
+                child: doc(
+                  'FORM',
+                  AppColors.goldSoft,
+                  AppColors.gold,
+                  AppColors.goldText,
+                  0.8,
+                  0.55,
+                ),
               ),
             ),
           ],
@@ -310,36 +401,62 @@ class FormsIllustration extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-              color: AppColors.navy, borderRadius: BorderRadius.circular(18)),
-          child: Row(children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration:
-                  const BoxDecoration(color: AppColors.gold, shape: BoxShape.circle),
-              child: const Icon(AppIcons.location, color: AppColors.navy, size: 20),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(s.barOffice,
-                    style: const TextStyle(
+            color: AppColors.navy,
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: const BoxDecoration(
+                  color: AppColors.gold,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  AppIcons.location,
+                  color: AppColors.navy,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      s.barOffice,
+                      style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-                Text(s.location,
-                    style: const TextStyle(
-                        fontSize: 13, color: AppColors.textOnNavyMuted)),
-              ]),
-            ),
-            Container(
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                  color: AppColors.primary, shape: BoxShape.circle),
-              child: const Icon(AppIcons.phone, color: Colors.white, size: 18),
-            ),
-          ]),
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      s.location,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppColors.textOnNavyMuted,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: const BoxDecoration(
+                  color: AppColors.primary,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  AppIcons.phone,
+                  color: Colors.white,
+                  size: 18,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

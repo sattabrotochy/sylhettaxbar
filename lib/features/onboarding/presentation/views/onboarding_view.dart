@@ -38,7 +38,9 @@ class _OnboardingViewState extends State<OnboardingView> {
       _finish();
     } else {
       _controller.nextPage(
-          duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     }
   }
 
@@ -69,11 +71,16 @@ class _OnboardingViewState extends State<OnboardingView> {
                       TextButton(
                         onPressed: _finish,
                         style: TextButton.styleFrom(
-                            foregroundColor: AppColors.primary,
-                            minimumSize: const Size(44, 44)),
-                        child: Text(s.skip,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600)),
+                          foregroundColor: AppColors.primary,
+                          minimumSize: const Size(44, 44),
+                        ),
+                        child: Text(
+                          s.skip,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                   ],
                 ),
@@ -99,25 +106,34 @@ class _OnboardingViewState extends State<OnboardingView> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('0${i + 1} / 0$_count',
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: 1.7,
-                                      color: AppColors.goldText)),
+                              Text(
+                                '0${i + 1} / 0$_count',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1.7,
+                                  color: AppColors.goldText,
+                                ),
+                              ),
                               const SizedBox(height: 10),
-                              Text(title,
-                                  style: const TextStyle(
-                                      fontSize: 30,
-                                      height: 1.15,
-                                      fontWeight: FontWeight.w800,
-                                      color: AppColors.navy)),
+                              Text(
+                                title,
+                                style: const TextStyle(
+                                  fontSize: 30,
+                                  height: 1.15,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.navy,
+                                ),
+                              ),
                               const SizedBox(height: 10),
-                              Text(body,
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      height: 1.5,
-                                      color: AppColors.textMuted)),
+                              Text(
+                                body,
+                                style: const TextStyle(
+                                  fontSize: 17,
+                                  height: 1.5,
+                                  color: AppColors.textMuted,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -135,7 +151,10 @@ class _OnboardingViewState extends State<OnboardingView> {
                         _Dots(index: _index, count: _count),
                         const SizedBox(height: 16),
                         _PrimaryButton(
-                            label: s.getStarted, onPressed: _next, expand: true),
+                          label: s.getStarted,
+                          onPressed: _next,
+                          expand: true,
+                        ),
                       ],
                     )
                   : Row(
@@ -143,9 +162,10 @@ class _OnboardingViewState extends State<OnboardingView> {
                         _Dots(index: _index, count: _count),
                         const Spacer(),
                         _PrimaryButton(
-                            label: s.next,
-                            onPressed: _next,
-                            icon: AppIcons.arrowForward),
+                          label: s.next,
+                          onPressed: _next,
+                          icon: AppIcons.arrowForward,
+                        ),
                       ],
                     ),
             ),

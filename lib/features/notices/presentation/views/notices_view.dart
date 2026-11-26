@@ -31,22 +31,30 @@ class NoticesView extends StatelessWidget {
         ),
         Expanded(
           child: switch (vm.status) {
-            ViewStatus.initial || ViewStatus.loading => const StateView.loading(),
-            ViewStatus.error =>
-              StateView.error(failure: vm.failure, onRetry: vm.load),
+            ViewStatus.initial ||
+            ViewStatus.loading => const StateView.loading(),
+            ViewStatus.error => StateView.error(
+              failure: vm.failure,
+              onRetry: vm.load,
+            ),
             _ => RefreshIndicator(
-                onRefresh: vm.load,
-                child: items.isEmpty
-                    ? ListView(children: [
-                        StateView.empty(message: emptyText, icon: AppIcons.notice)
-                      ])
-                    : ListView.separated(
-                        padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-                        itemCount: items.length,
-                        separatorBuilder: (_, _) => const SizedBox(height: 10),
-                        itemBuilder: (_, i) => NoticeTile(notice: items[i]),
-                      ),
-              ),
+              onRefresh: vm.load,
+              child: items.isEmpty
+                  ? ListView(
+                      children: [
+                        StateView.empty(
+                          message: emptyText,
+                          icon: AppIcons.notice,
+                        ),
+                      ],
+                    )
+                  : ListView.separated(
+                      padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+                      itemCount: items.length,
+                      separatorBuilder: (_, _) => const SizedBox(height: 10),
+                      itemBuilder: (_, i) => NoticeTile(notice: items[i]),
+                    ),
+            ),
           },
         ),
       ],
@@ -90,11 +98,14 @@ class _SegmentedTabs extends StatelessWidget {
                   child: SizedBox(
                     height: 40,
                     child: Center(
-                      child: Text(labels[i],
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              color: on ? Colors.white : AppColors.textMuted)),
+                      child: Text(
+                        labels[i],
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: on ? Colors.white : AppColors.textMuted,
+                        ),
+                      ),
                     ),
                   ),
                 ),

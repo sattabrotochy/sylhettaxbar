@@ -26,7 +26,10 @@ class Parse {
 
   static List<Map<String, dynamic>> list(dynamic v) {
     if (v is List) {
-      return v.whereType<Map>().map((e) => Map<String, dynamic>.from(e)).toList();
+      return v
+          .whereType<Map>()
+          .map((e) => Map<String, dynamic>.from(e))
+          .toList();
     }
     return const [];
   }
