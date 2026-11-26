@@ -14,9 +14,6 @@ class AboutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = context.strings;
-    void comingSoon() => ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(s.comingSoon)));
-
     final goals = [
       (AppIcons.school, s.goalDevelopment, false),
       (AppIcons.book, s.goalKnowledge, true),
@@ -33,53 +30,73 @@ class AboutView extends StatelessWidget {
             Container(
               decoration: const BoxDecoration(
                 color: AppColors.navy,
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(28)),
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(28),
+                ),
               ),
               padding: EdgeInsets.fromLTRB(
-                  20, MediaQuery.paddingOf(context).top + 8, 20, 26),
+                20,
+                MediaQuery.paddingOf(context).top + 8,
+                20,
+                26,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    HeaderIconButton(
-                      icon: AppIcons.back,
-                      onDark: true,
-                      tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-                      onPressed: () => context.canPop()
-                          ? context.pop()
-                          : context.go(AppRoutes.more),
-                    ),
-                    const SizedBox(width: 10),
-                    Text(s.aboutUs,
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white)),
-                  ]),
-                  const SizedBox(height: 18),
-                  Row(children: [
-                    const Emblem(size: 68),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(s.sylhetDistrict.toUpperCase(),
-                              style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 1.5,
-                                  color: AppColors.gold)),
-                          Text(s.associationName,
-                              style: const TextStyle(
-                                  fontSize: 24,
-                                  height: 1.2,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.white)),
-                        ],
+                  Row(
+                    children: [
+                      HeaderIconButton(
+                        icon: AppIcons.back,
+                        onDark: true,
+                        tooltip: MaterialLocalizations.of(context)
+                            .backButtonTooltip,
+                        onPressed: () => context.canPop()
+                            ? context.pop()
+                            : context.go(AppRoutes.more),
                       ),
-                    ),
-                  ]),
+                      const SizedBox(width: 10),
+                      Text(
+                        s.aboutUs,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+                  Row(
+                    children: [
+                      const Emblem(size: 68),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              s.sylhetDistrict.toUpperCase(),
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 1.5,
+                                color: AppColors.gold,
+                              ),
+                            ),
+                            Text(
+                              s.associationName,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                height: 1.2,
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -91,7 +108,10 @@ class AboutView extends StatelessWidget {
                   _InfoCard(title: s.whoWeAre, body: s.whoWeAreBody),
                   const SizedBox(height: 14),
                   _InfoCard(
-                      title: s.ourMission, body: s.ourMissionBody, highlight: true),
+                    title: s.ourMission,
+                    body: s.ourMissionBody,
+                    highlight: true,
+                  ),
                   const SizedBox(height: 14),
                   SectionTitle(s.whatWeWorkOn),
                   const SizedBox(height: 10),
@@ -119,23 +139,30 @@ class AboutView extends StatelessWidget {
                                 width: 36,
                                 height: 36,
                                 decoration: BoxDecoration(
-                                  color: gold ? AppColors.goldSoft : AppColors.line,
+                                  color: gold
+                                      ? AppColors.goldSoft
+                                      : AppColors.line,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Icon(icon,
-                                    size: 18,
-                                    color: gold
-                                        ? AppColors.goldText
-                                        : AppColors.primary),
+                                child: Icon(
+                                  icon,
+                                  size: 18,
+                                  color: gold
+                                      ? AppColors.goldText
+                                      : AppColors.primary,
+                                ),
                               ),
                               const Spacer(),
-                              Text(label,
-                                  maxLines: 2,
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      height: 1.25,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.navy)),
+                              Text(
+                                label,
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  height: 1.25,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.navy,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -145,13 +172,22 @@ class AboutView extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14),
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(18)),
-                    child: Column(children: [
-                      MenuRow(label: s.history, onTap: comingSoon),
-                      MenuRow(
-                          label: s.constitution, onTap: comingSoon, divider: false),
-                    ]),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Column(
+                      children: [
+                        MenuRow(
+                          label: s.history,
+                          onTap: () => context.push(AppRoutes.history),
+                        ),
+                        MenuRow(
+                          label: s.constitution,
+                          onTap: () => context.push(AppRoutes.constitution),
+                          divider: false,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -164,7 +200,11 @@ class AboutView extends StatelessWidget {
 }
 
 class _InfoCard extends StatelessWidget {
-  const _InfoCard({required this.title, required this.body, this.highlight = false});
+  const _InfoCard({
+    required this.title,
+    required this.body,
+    this.highlight = false,
+  });
   final String title;
   final String body;
   final bool highlight;
@@ -180,17 +220,23 @@ class _InfoCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
-              style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w800,
-                  color: highlight ? Colors.white : AppColors.navy)),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w800,
+              color: highlight ? Colors.white : AppColors.navy,
+            ),
+          ),
           const SizedBox(height: 6),
-          Text(body,
-              style: TextStyle(
-                  fontSize: 15,
-                  height: 1.55,
-                  color: highlight ? AppColors.line : AppColors.textMuted)),
+          Text(
+            body,
+            style: TextStyle(
+              fontSize: 15,
+              height: 1.55,
+              color: highlight ? AppColors.line : AppColors.textMuted,
+            ),
+          ),
         ],
       ),
     );

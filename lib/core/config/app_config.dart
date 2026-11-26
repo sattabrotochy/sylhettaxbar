@@ -34,5 +34,14 @@ class AppConfig {
       '131, MR Tower, Burhan Uddin Road, Mendibagh, Sylhet–3100, Bangladesh';
   static const String officeMapsQuery =
       'MR Tower, Burhan Uddin Road, Mendibagh, Sylhet';
+
+  /// Photo gallery page on the website, shown in an in-app web view.
+  static String galleryUrl(String langCode) =>
+      '$siteUrl/home/picture/$langCode';
+
+  /// Website page that verifies a digital vakalatnama by its ID.
+  static String vakalatnamaVerifyUrl(String langCode, String id) =>
+      '$siteUrl/verify/v/$langCode/${Uri.encodeComponent(id)}';
+
   static const String districtBarUrl = 'https://www.sylhetbar.com.bd/';
 }

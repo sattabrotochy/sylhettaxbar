@@ -11,16 +11,17 @@ import '../error/exceptions.dart';
 /// Responses are JSON objects; a body like `{"error": "..."}` is an error.
 class ApiClient {
   ApiClient({Dio? dio})
-      : _dio = dio ??
-            Dio(
-              BaseOptions(
-                baseUrl: AppConfig.apiBaseUrl,
-                connectTimeout: AppConfig.connectTimeout,
-                receiveTimeout: AppConfig.receiveTimeout,
-                contentType: Headers.formUrlEncodedContentType,
-                responseType: ResponseType.plain,
-              ),
-            );
+    : _dio =
+          dio ??
+          Dio(
+            BaseOptions(
+              baseUrl: AppConfig.apiBaseUrl,
+              connectTimeout: AppConfig.connectTimeout,
+              receiveTimeout: AppConfig.receiveTimeout,
+              contentType: Headers.formUrlEncodedContentType,
+              responseType: ResponseType.plain,
+            ),
+          );
 
   final Dio _dio;
 
@@ -47,12 +48,16 @@ class ApiClient {
     try {
       decoded = jsonDecode(raw);
     } on FormatException {
-      throw ServerException('Invalid response from server',
-          statusCode: statusCode);
+      throw ServerException(
+        'Invalid response from server',
+        statusCode: statusCode,
+      );
     }
     if (decoded is! Map) {
-      throw ServerException('Unexpected response format',
-          statusCode: statusCode);
+      throw ServerException(
+        'Unexpected response format',
+        statusCode: statusCode,
+      );
     }
     final map = Map<String, dynamic>.from(decoded);
     if (map['error'] != null) {

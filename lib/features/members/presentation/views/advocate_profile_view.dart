@@ -42,7 +42,9 @@ class AdvocateProfileView extends StatelessWidget {
                 height: 300,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.08),
+                  ),
                 ),
               ),
             ),
@@ -57,19 +59,22 @@ class AdvocateProfileView extends StatelessWidget {
                         HeaderIconButton(
                           icon: AppIcons.back,
                           onDark: true,
-                          tooltip:
-                              MaterialLocalizations.of(context).backButtonTooltip,
+                          tooltip: MaterialLocalizations.of(context)
+                              .backButtonTooltip,
                           onPressed: () => context.canPop()
                               ? context.pop()
                               : context.go(AppRoutes.members),
                         ),
                         Expanded(
-                          child: Text(s.advocateProfile,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white)),
+                          child: Text(
+                            s.advocateProfile,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                         HeaderIconButton(
                           icon: AppIcons.share,
@@ -86,18 +91,20 @@ class AdvocateProfileView extends StatelessWidget {
                     child: switch (vm.status) {
                       ViewStatus.initial ||
                       ViewStatus.loading ||
-                      ViewStatus.empty =>
-                        const Center(
-                            child:
-                                CircularProgressIndicator(color: Colors.white)),
+                      ViewStatus.empty => const Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
                       ViewStatus.error => Container(
-                          margin: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(24)),
-                          child: StateView.error(
-                              failure: vm.failure, onRetry: vm.load),
+                        margin: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(24),
                         ),
+                        child: StateView.error(
+                          failure: vm.failure,
+                          onRetry: vm.load,
+                        ),
+                      ),
                       ViewStatus.success => _ProfileBody(member: member!),
                     },
                   ),
@@ -148,28 +155,35 @@ class _ProfileBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: const [
                   BoxShadow(
-                      color: Color(0x14001B4D),
-                      blurRadius: 30,
-                      offset: Offset(0, 10)),
+                    color: Color(0x14001B4D),
+                    blurRadius: 30,
+                    offset: Offset(0, 10),
+                  ),
                 ],
               ),
               child: Column(
                 children: [
-                  Text(member.name(l),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.navy)),
+                  Text(
+                    member.name(l),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: AppColors.navy,
+                    ),
+                  ),
                   Text(
                     DateFmt.digits(
-                        member.memberNo.isEmpty
-                            ? s.advocate
-                            : '${s.advocate} · ${s.memberNo(member.memberNo)}',
-                        l),
+                      member.memberNo.isEmpty
+                          ? s.advocate
+                          : '${s.advocate} · ${s.memberNo(member.memberNo)}',
+                      l,
+                    ),
                     textAlign: TextAlign.center,
-                    style:
-                        const TextStyle(fontSize: 15, color: AppColors.textMuted),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: AppColors.textMuted,
+                    ),
                   ),
                   if (member.isGolden ||
                       member.isFreedomFighter ||
@@ -184,16 +198,18 @@ class _ProfileBody extends StatelessWidget {
                           TagBadge(label: s.goldenMember, fontSize: 13),
                         if (member.isFreedomFighter)
                           TagBadge(
-                              label: s.freedomFighter,
-                              background: AppColors.line,
-                              foreground: AppColors.primary,
-                              fontSize: 13),
+                            label: s.freedomFighter,
+                            background: AppColors.line,
+                            foreground: AppColors.primary,
+                            fontSize: 13,
+                          ),
                         if (member.isRetired)
                           TagBadge(
-                              label: s.retired,
-                              background: AppColors.background,
-                              foreground: AppColors.textMuted,
-                              fontSize: 13),
+                            label: s.retired,
+                            background: AppColors.background,
+                            foreground: AppColors.textMuted,
+                            fontSize: 13,
+                          ),
                       ],
                     ),
                   ],
@@ -208,7 +224,10 @@ class _ProfileBody extends StatelessWidget {
                           onPressed: member.phone.isEmpty
                               ? null
                               : () => Launcher.call(
-                                  context, member.phone, s.couldNotOpen),
+                                  context,
+                                  member.phone,
+                                  s.couldNotOpen,
+                                ),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -219,7 +238,10 @@ class _ProfileBody extends StatelessWidget {
                           onPressed: member.email.isEmpty
                               ? null
                               : () => Launcher.email(
-                                  context, member.email, s.couldNotOpen),
+                                  context,
+                                  member.email,
+                                  s.couldNotOpen,
+                                ),
                         ),
                       ),
                     ],
@@ -239,10 +261,11 @@ class _ProfileBody extends StatelessWidget {
                   border: Border.all(color: AppColors.gold, width: 3),
                 ),
                 child: Avatar(
-                    url: member.imageUrl.isNotEmpty
-                        ? member.imageUrl
-                        : member.thumbUrl,
-                    size: 92),
+                  url: member.imageUrl.isNotEmpty
+                      ? member.imageUrl
+                      : member.thumbUrl,
+                  size: 92,
+                ),
               ),
             ),
           ],
@@ -251,31 +274,38 @@ class _ProfileBody extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 12, bottom: 4),
-                child: Text(s.details,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.navy)),
+                child: Text(
+                  s.details,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.navy,
+                  ),
+                ),
               ),
               for (final (icon, label, value) in rows)
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: const BoxDecoration(
-                      border: Border(top: BorderSide(color: AppColors.line))),
+                    border: Border(top: BorderSide(color: AppColors.line)),
+                  ),
                   child: Row(
                     children: [
                       Container(
                         width: 36,
                         height: 36,
                         decoration: BoxDecoration(
-                            color: AppColors.background,
-                            borderRadius: BorderRadius.circular(10)),
+                          color: AppColors.background,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: Icon(icon, size: 18, color: AppColors.primary),
                       ),
                       const SizedBox(width: 12),
@@ -283,17 +313,23 @@ class _ProfileBody extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(label,
-                                style: const TextStyle(
-                                    fontSize: 13,
-                                    height: 1.3,
-                                    color: AppColors.textMuted)),
-                            SelectableText(value,
-                                style: const TextStyle(
-                                    fontSize: 15,
-                                    height: 1.3,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.text)),
+                            Text(
+                              label,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                height: 1.3,
+                                color: AppColors.textMuted,
+                              ),
+                            ),
+                            SelectableText(
+                              value,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                height: 1.3,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.text,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -308,7 +344,10 @@ class _ProfileBody extends StatelessWidget {
   }
 
   static List<(IconData, String, String)> _detailRows(
-      Member m, AppStrings s, AppLanguage l) {
+    Member m,
+    AppStrings s,
+    AppLanguage l,
+  ) {
     String or(String v) => v.isEmpty ? s.notAvailable : v;
     return [
       (AppIcons.calendar, s.memberSince, or(DateFmt.year(m.memberSince, l))),
