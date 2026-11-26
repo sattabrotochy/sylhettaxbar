@@ -11,7 +11,6 @@ class AppIcons {
   static const committee = Icons.account_balance_outlined;
   static const notice = Icons.description_outlined;
   static const news = Icons.article_outlined;
-  static const election = Icons.how_to_vote_outlined;
   static const staff = Icons.work_outline_rounded;
   static const gallery = Icons.photo_outlined;
   static const phone = Icons.call_outlined;
@@ -38,6 +37,7 @@ class AppIcons {
   static const badge = Icons.badge_outlined;
   static const school = Icons.school_outlined;
   static const verified = Icons.verified_outlined;
+  static const vakalatnama = Icons.edit_document;
   static const megaphone = Icons.campaign_outlined;
   static const directions = Icons.directions_outlined;
 }

@@ -8,9 +8,10 @@ enum AppLanguage {
 
   bool get isBangla => this == AppLanguage.bn;
 
-  static AppLanguage fromCode(String? code) =>
-      AppLanguage.values.firstWhere((l) => l.code == code,
-          orElse: () => AppLanguage.en);
+  static AppLanguage fromCode(String? code) => AppLanguage.values.firstWhere(
+    (l) => l.code == code,
+    orElse: () => AppLanguage.en,
+  );
 
   /// Picks the Bangla text when available and selected, else English.
   String pick(String en, String bn) {

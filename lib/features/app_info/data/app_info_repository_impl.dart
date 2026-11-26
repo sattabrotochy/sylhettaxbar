@@ -11,13 +11,13 @@ class AppInfoRepositoryImpl implements AppInfoRepository {
 
   @override
   Future<Result<AppInfo>> getAppInfo() => guard(() async {
-        final json = await _client.post(ApiEndpoints.appInfo);
-        final list = Parse.list(json['app_info']);
-        if (list.isEmpty) throw const NotFoundException('No app info');
-        final j = list.first;
-        return AppInfo(
-          name: Parse.str(j['app_name']),
-          versionCode: Parse.str(j['app_version_code']),
-        );
-      });
+    final json = await _client.post(ApiEndpoints.appInfo);
+    final list = Parse.list(json['app_info']);
+    if (list.isEmpty) throw const NotFoundException('No app info');
+    final j = list.first;
+    return AppInfo(
+      name: Parse.str(j['app_name']),
+      versionCode: Parse.str(j['app_version_code']),
+    );
+  });
 }
