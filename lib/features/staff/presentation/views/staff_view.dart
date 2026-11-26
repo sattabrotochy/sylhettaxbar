@@ -24,21 +24,25 @@ class StaffView extends StatelessWidget {
           BackHeader(title: s.staff),
           Expanded(
             child: switch (vm.status) {
-              ViewStatus.initial || ViewStatus.loading =>
-                const StateView.loading(),
-              ViewStatus.error =>
-                StateView.error(failure: vm.failure, onRetry: vm.load),
-              ViewStatus.empty =>
-                StateView.empty(message: s.noStaff, icon: AppIcons.staff),
+              ViewStatus.initial ||
+              ViewStatus.loading => const StateView.loading(),
+              ViewStatus.error => StateView.error(
+                failure: vm.failure,
+                onRetry: vm.load,
+              ),
+              ViewStatus.empty => StateView.empty(
+                message: s.noStaff,
+                icon: AppIcons.staff,
+              ),
               ViewStatus.success => RefreshIndicator(
-                  onRefresh: vm.load,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
-                    itemCount: vm.staff.length,
-                    separatorBuilder: (_, _) => const SizedBox(height: 10),
-                    itemBuilder: (_, i) => _StaffTile(staff: vm.staff[i]),
-                  ),
+                onRefresh: vm.load,
+                child: ListView.separated(
+                  padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
+                  itemCount: vm.staff.length,
+                  separatorBuilder: (_, _) => const SizedBox(height: 10),
+                  itemBuilder: (_, i) => _StaffTile(staff: vm.staff[i]),
                 ),
+              ),
             },
           ),
         ],
@@ -71,15 +75,23 @@ class _StaffTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(staff.name(l),
-                    style: const TextStyle(
-                        fontSize: 16,
-                        height: 1.35,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.navy)),
-                Text(staff.designation(l),
-                    style: const TextStyle(
-                        fontSize: 13, height: 1.35, color: AppColors.textMuted)),
+                Text(
+                  staff.name(l),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    height: 1.35,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.navy,
+                  ),
+                ),
+                Text(
+                  staff.designation(l),
+                  style: const TextStyle(
+                    fontSize: 13,
+                    height: 1.35,
+                    color: AppColors.textMuted,
+                  ),
+                ),
               ],
             ),
           ),
@@ -118,39 +130,54 @@ class _StaffSheet extends StatelessWidget {
           children: [
             Avatar(url: staff.photoUrl, size: 88),
             const SizedBox(height: 10),
-            Text(staff.name(l),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.navy)),
-            Text(staff.designation(l),
-                style: const TextStyle(fontSize: 15, color: AppColors.textMuted)),
+            Text(
+              staff.name(l),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w800,
+                color: AppColors.navy,
+              ),
+            ),
+            Text(
+              staff.designation(l),
+              style: const TextStyle(fontSize: 15, color: AppColors.textMuted),
+            ),
             const SizedBox(height: 12),
             for (final (icon, label, value) in rows)
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 decoration: const BoxDecoration(
-                    border: Border(top: BorderSide(color: AppColors.line))),
-                child: Row(children: [
-                  Icon(icon, color: AppColors.primary, size: 20),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(label,
+                  border: Border(top: BorderSide(color: AppColors.line)),
+                ),
+                child: Row(
+                  children: [
+                    Icon(icon, color: AppColors.primary, size: 20),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            label,
                             style: const TextStyle(
-                                fontSize: 13, color: AppColors.textMuted)),
-                        Text(value,
+                              fontSize: 13,
+                              color: AppColors.textMuted,
+                            ),
+                          ),
+                          Text(
+                            value,
                             style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.text)),
-                      ],
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.text,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             if (staff.mobile.isNotEmpty) ...[
               const SizedBox(height: 8),
@@ -162,10 +189,13 @@ class _StaffSheet extends StatelessWidget {
                 style: FilledButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   minimumSize: const Size.fromHeight(50),
-                  textStyle:
-                      const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
               ),
             ],
