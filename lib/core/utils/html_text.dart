@@ -3,8 +3,10 @@
 class HtmlText {
   HtmlText._();
 
-  static final _blockEnd =
-      RegExp(r'</(p|div|h[1-6]|li|tr|ul|ol|table)\s*>', caseSensitive: false);
+  static final _blockEnd = RegExp(
+    r'</(p|div|h[1-6]|li|tr|ul|ol|table)\s*>',
+    caseSensitive: false,
+  );
   static final _br = RegExp(r'<br\s*/?>', caseSensitive: false);
   static final _li = RegExp(r'<li[^>]*>', caseSensitive: false);
   static final _tag = RegExp(r'<[^>]+>');

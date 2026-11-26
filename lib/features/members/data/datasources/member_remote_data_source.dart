@@ -15,9 +15,14 @@ class MemberRemoteDataSourceImpl implements MemberRemoteDataSource {
   final ApiClient _client;
 
   @override
-  Future<MembersPage> getMembers({required int page, required int limit}) async {
+  Future<MembersPage> getMembers({
+    required int page,
+    required int limit,
+  }) async {
     final json = await _client.post(ApiEndpoints.members(page, limit));
-    final members = Parse.list(json['result']).map(MemberModel.fromJson).toList();
+    final members = Parse.list(json['result'])
+        .map(MemberModel.fromJson)
+        .toList();
     return MembersPage(
       members: members,
       total: Parse.integer(json['total_row'], members.length),
