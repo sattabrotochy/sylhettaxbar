@@ -37,36 +37,45 @@ class HomeView extends StatelessWidget {
                   const SizedBox(height: 12),
                   const _QuickAccessGrid(),
                   const SizedBox(height: 22),
-                  _ElectionBanner(onTap: () => context.push(AppRoutes.election)),
+                  const _VerifyVakalatnamaCard(),
                   const SizedBox(height: 22),
                   SectionTitle(
                     s.latestNotices,
                     trailing: TextButton(
                       onPressed: () => context.go(AppRoutes.notices),
                       style: TextButton.styleFrom(
-                          foregroundColor: AppColors.primary,
-                          minimumSize: const Size(44, 44)),
-                      child: Text(s.seeAll,
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w700)),
+                        foregroundColor: AppColors.primary,
+                        minimumSize: const Size(44, 44),
+                      ),
+                      child: Text(
+                        s.seeAll,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 4),
                   switch (vm.status) {
-                    ViewStatus.initial || ViewStatus.loading =>
-                      const StateView.loading(),
-                    ViewStatus.error =>
-                      StateView.error(failure: vm.failure, onRetry: vm.load),
-                    ViewStatus.empty =>
-                      StateView.empty(message: s.noNotices, icon: AppIcons.notice),
+                    ViewStatus.initial ||
+                    ViewStatus.loading => const StateView.loading(),
+                    ViewStatus.error => StateView.error(
+                      failure: vm.failure,
+                      onRetry: vm.load,
+                    ),
+                    ViewStatus.empty => StateView.empty(
+                      message: s.noNotices,
+                      icon: AppIcons.notice,
+                    ),
                     ViewStatus.success => Column(
-                        children: [
-                          for (final n in vm.latestNotices) ...[
-                            _LatestNoticeTile(notice: n),
-                            const SizedBox(height: 10),
-                          ],
+                      children: [
+                        for (final n in vm.latestNotices) ...[
+                          _LatestNoticeTile(notice: n),
+                          const SizedBox(height: 10),
                         ],
-                      ),
+                      ],
+                    ),
                   },
                 ],
               ),
@@ -90,7 +99,11 @@ class _Header extends StatelessWidget {
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(28)),
       ),
       padding: EdgeInsets.fromLTRB(
-          20, MediaQuery.paddingOf(context).top + 12, 20, 22),
+        20,
+        MediaQuery.paddingOf(context).top + 12,
+        20,
+        22,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -102,17 +115,23 @@ class _Header extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(s.sylhetDistrict,
-                        style: const TextStyle(
-                            fontSize: 13,
-                            height: 1.2,
-                            color: AppColors.textOnNavyMuted)),
-                    Text(s.associationName,
-                        style: const TextStyle(
-                            fontSize: 19,
-                            height: 1.2,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white)),
+                    Text(
+                      s.sylhetDistrict,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        height: 1.2,
+                        color: AppColors.textOnNavyMuted,
+                      ),
+                    ),
+                    Text(
+                      s.associationName,
+                      style: const TextStyle(
+                        fontSize: 19,
+                        height: 1.2,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -136,13 +155,23 @@ class _Header extends StatelessWidget {
                 height: 50,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(children: [
-                    const Icon(AppIcons.search, color: AppColors.primary, size: 20),
-                    const SizedBox(width: 10),
-                    Text(s.searchByName,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        AppIcons.search,
+                        color: AppColors.primary,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        s.searchByName,
                         style: const TextStyle(
-                            fontSize: 15, color: AppColors.textMuted)),
-                  ]),
+                          fontSize: 15,
+                          color: AppColors.textMuted,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -162,13 +191,18 @@ class _QuickAccessGrid extends StatelessWidget {
     // (icon, label, action, style) — style: 0 white, 1 blue, 2 gold
     final items = <(IconData, String, VoidCallback, int)>[
       (AppIcons.members, s.members, () => context.go(AppRoutes.members), 1),
-      (AppIcons.committee, s.committee, () => context.push(AppRoutes.committee), 0),
+      (
+        AppIcons.committee,
+        s.committee,
+        () => context.push(AppRoutes.committee),
+        0,
+      ),
       (AppIcons.notice, s.notices, () => context.go(AppRoutes.notices), 0),
       (AppIcons.news, s.news, () => context.go(AppRoutes.notices), 0),
-      (AppIcons.election, s.election, () => context.push(AppRoutes.election), 2),
       (AppIcons.staff, s.staff, () => context.push(AppRoutes.staff), 0),
       (AppIcons.gallery, s.gallery, () => context.push(AppRoutes.gallery), 0),
       (AppIcons.phone, s.contact, () => context.push(AppRoutes.contact), 0),
+      (AppIcons.info, s.about, () => context.push(AppRoutes.about), 2),
     ];
 
     return GridView.count(
@@ -197,24 +231,31 @@ class _QuickAccessGrid extends StatelessWidget {
                       _ => AppColors.surface,
                     },
                     borderRadius: BorderRadius.circular(18),
-                    border: style == 0 ? Border.all(color: AppColors.line) : null,
+                    border: style == 0
+                        ? Border.all(color: AppColors.line)
+                        : null,
                   ),
-                  child: Icon(icon,
-                      size: 24,
-                      color: switch (style) {
-                        1 => Colors.white,
-                        2 => AppColors.navy,
-                        _ => AppColors.primary,
-                      }),
+                  child: Icon(
+                    icon,
+                    size: 24,
+                    color: switch (style) {
+                      1 => Colors.white,
+                      2 => AppColors.navy,
+                      _ => AppColors.primary,
+                    },
+                  ),
                 ),
                 const SizedBox(height: 6),
-                Text(label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.text)),
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.text,
+                  ),
+                ),
               ],
             ),
           ),
@@ -223,48 +264,152 @@ class _QuickAccessGrid extends StatelessWidget {
   }
 }
 
-class _ElectionBanner extends StatelessWidget {
-  const _ElectionBanner({required this.onTap});
-  final VoidCallback onTap;
+/// Verify a digital vakalatnama by its ID. The result comes from the
+/// association's website (there is no API for it), shown in the app.
+class _VerifyVakalatnamaCard extends StatefulWidget {
+  const _VerifyVakalatnamaCard();
+
+  @override
+  State<_VerifyVakalatnamaCard> createState() => _VerifyVakalatnamaCardState();
+}
+
+class _VerifyVakalatnamaCardState extends State<_VerifyVakalatnamaCard> {
+  final _controller = TextEditingController();
+  bool _showError = false;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _verify() {
+    final id = _controller.text.trim();
+    if (id.isEmpty) {
+      setState(() => _showError = true);
+      return;
+    }
+    setState(() => _showError = false);
+    FocusScope.of(context).unfocus();
+    context.push(AppRoutes.vakalatnama(id));
+  }
 
   @override
   Widget build(BuildContext context) {
     final s = context.strings;
-    return AppCard(
-      color: AppColors.primary,
-      radius: 20,
-      bordered: false,
-      padding: const EdgeInsets.all(16),
-      onTap: onTap,
-      child: Row(
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [AppColors.navy, AppColors.primary],
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(14)),
-            child: const Icon(AppIcons.election, color: AppColors.gold, size: 24),
+          Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  AppIcons.vakalatnama,
+                  color: AppColors.gold,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  s.verifyVakalatnamaTitle,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    height: 1.25,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(s.electionBannerLabel,
-                    style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.gold)),
-                Text(s.readCecMessage,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white)),
-              ],
+          const SizedBox(height: 8),
+          Text(
+            s.verifyVakalatnamaBody,
+            style: const TextStyle(
+              fontSize: 14,
+              height: 1.45,
+              color: AppColors.textOnNavyMuted,
             ),
           ),
-          const Icon(AppIcons.chevronRight, color: Colors.white),
+          const SizedBox(height: 14),
+          TextField(
+            controller: _controller,
+            textInputAction: TextInputAction.search,
+            onSubmitted: (_) => _verify(),
+            onChanged: (_) {
+              if (_showError) setState(() => _showError = false);
+            },
+            style: const TextStyle(fontSize: 16, color: Colors.white),
+            cursorColor: AppColors.gold,
+            decoration: InputDecoration(
+              hintText: s.vakalatnamaId,
+              hintStyle: const TextStyle(color: AppColors.textOnNavyMuted),
+              errorText: _showError ? s.vakalatnamaIdRequired : null,
+              errorStyle: const TextStyle(color: AppColors.gold),
+              filled: true,
+              fillColor: Colors.white.withValues(alpha: 0.1),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 14,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide.none,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: BorderSide(
+                  color: Colors.white.withValues(alpha: 0.25),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: const BorderSide(color: AppColors.gold, width: 1.5),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: const BorderSide(color: AppColors.gold),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(14),
+                borderSide: const BorderSide(color: AppColors.gold, width: 1.5),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          FilledButton(
+            onPressed: _verify,
+            style: FilledButton.styleFrom(
+              backgroundColor: AppColors.gold,
+              foregroundColor: AppColors.navy,
+              minimumSize: const Size.fromHeight(50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              textStyle: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            child: Text(s.verifyVakalatnama),
+          ),
         ],
       ),
     );
@@ -288,25 +433,39 @@ class _LatestNoticeTile extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-                color: AppColors.line, borderRadius: BorderRadius.circular(12)),
-            child: const Icon(AppIcons.notice, color: AppColors.primary, size: 20),
+              color: AppColors.line,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              AppIcons.notice,
+              color: AppColors.primary,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(notice.title(l),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 15,
-                        height: 1.35,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.navy)),
-                Text(date.isEmpty ? s.notice : '${s.notice} · $date',
-                    style: const TextStyle(
-                        fontSize: 13, height: 1.35, color: AppColors.textMuted)),
+                Text(
+                  notice.title(l),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    height: 1.35,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.navy,
+                  ),
+                ),
+                Text(
+                  date.isEmpty ? s.notice : '${s.notice} · $date',
+                  style: const TextStyle(
+                    fontSize: 13,
+                    height: 1.35,
+                    color: AppColors.textMuted,
+                  ),
+                ),
               ],
             ),
           ),

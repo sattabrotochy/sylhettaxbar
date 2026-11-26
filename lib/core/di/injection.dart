@@ -34,43 +34,45 @@ Future<void> configureDependencies() async {
   sl
     ..registerSingleton<SharedPreferences>(prefs)
     ..registerLazySingleton<ApiClient>(ApiClient.new)
-
     // Settings
     ..registerLazySingleton<SettingsLocalDataSource>(
-        () => SettingsLocalDataSourceImpl(sl()))
+      () => SettingsLocalDataSourceImpl(sl()),
+    )
     ..registerLazySingleton<SettingsRepository>(
-        () => SettingsRepositoryImpl(sl()))
-
+      () => SettingsRepositoryImpl(sl()),
+    )
     // Members
     ..registerLazySingleton<MemberRemoteDataSource>(
-        () => MemberRemoteDataSourceImpl(sl()))
+      () => MemberRemoteDataSourceImpl(sl()),
+    )
     ..registerLazySingleton<MemberRepository>(() => MemberRepositoryImpl(sl()))
     ..registerFactory(() => GetMembers(sl()))
     ..registerFactory(() => GetMemberDetails(sl()))
-
     // Notices
     ..registerLazySingleton<NoticeRemoteDataSource>(
-        () => NoticeRemoteDataSourceImpl(sl()))
+      () => NoticeRemoteDataSourceImpl(sl()),
+    )
     ..registerLazySingleton<NoticeRepository>(() => NoticeRepositoryImpl(sl()))
     ..registerFactory(() => GetNotices(sl()))
     ..registerFactory(() => GetNoticeDetails(sl()))
-
     // Committee
     ..registerLazySingleton<CommitteeRemoteDataSource>(
-        () => CommitteeRemoteDataSourceImpl(sl()))
+      () => CommitteeRemoteDataSourceImpl(sl()),
+    )
     ..registerLazySingleton<CommitteeRepository>(
-        () => CommitteeRepositoryImpl(sl()))
+      () => CommitteeRepositoryImpl(sl()),
+    )
     ..registerFactory(() => GetCommittees(sl()))
     ..registerFactory(() => GetCommitteeMembers(sl()))
-
     // Staff
     ..registerLazySingleton<StaffRemoteDataSource>(
-        () => StaffRemoteDataSourceImpl(sl()))
+      () => StaffRemoteDataSourceImpl(sl()),
+    )
     ..registerLazySingleton<StaffRepository>(() => StaffRepositoryImpl(sl()))
     ..registerFactory(() => GetStaff(sl()))
-
     // App info
     ..registerLazySingleton<AppInfoRepository>(
-        () => AppInfoRepositoryImpl(sl()))
+      () => AppInfoRepositoryImpl(sl()),
+    )
     ..registerFactory(() => GetAppInfo(sl()));
 }
