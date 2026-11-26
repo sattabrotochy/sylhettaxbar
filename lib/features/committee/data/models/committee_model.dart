@@ -11,8 +11,10 @@ class CommitteeModel {
       id: id,
       name: Parse.str(j['committee_period_name']),
       startDate: Parse.date(j['committee_start_time']),
-      bannerUrl:
-          ApiEndpoints.committeeBanner(id, Parse.str(j['committee_img_ext'])),
+      bannerUrl: ApiEndpoints.committeeBanner(
+        id,
+        Parse.str(j['committee_img_ext']),
+      ),
     );
   }
 }
@@ -32,8 +34,10 @@ class CommitteeMemberModel {
       priority: Parse.integer(j['member_priority'], 999),
       memberNo: Parse.str(j['member_id_no']),
       phone: Parse.str(j['member_phone']),
-      photoUrl:
-          ApiEndpoints.memberThumb(memberId, Parse.str(j['member_image_ext'])),
+      photoUrl: ApiEndpoints.memberThumb(
+        memberId,
+        Parse.str(j['member_image_ext']),
+      ),
     );
   }
 }

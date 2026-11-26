@@ -15,9 +15,13 @@ class AppRoutes {
   static String notice(String id) => '/notices/$id';
   static const committee = '/committee';
   static const staff = '/staff';
-  static const election = '/election';
   static const gallery = '/gallery';
+  static const verifyVakalatnama = '/verify-vakalatnama';
+  static String vakalatnama(String id) =>
+      Uri(path: verifyVakalatnama, queryParameters: {'id': id}).toString();
   static const about = '/about';
+  static const history = '/history';
+  static const constitution = '/constitution';
   static const contact = '/contact';
   static const privacy = '/privacy';
 }
