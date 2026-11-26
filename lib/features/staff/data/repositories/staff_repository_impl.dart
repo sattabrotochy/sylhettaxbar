@@ -9,8 +9,8 @@ class StaffRepositoryImpl implements StaffRepository {
 
   @override
   Future<Result<List<Staff>>> getStaff() => guard(() async {
-        final list = await _remote.getStaff();
-        list.sort((a, b) => a.position.compareTo(b.position));
-        return list;
-      });
+    final list = await _remote.getStaff();
+    list.sort((a, b) => a.position.compareTo(b.position));
+    return list;
+  });
 }

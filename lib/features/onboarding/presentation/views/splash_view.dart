@@ -56,7 +56,9 @@ class _SplashViewState extends State<SplashView>
                 width: 380,
                 height: 380,
                 decoration: const BoxDecoration(
-                    color: AppColors.navyDeep, shape: BoxShape.circle),
+                  color: AppColors.navyDeep,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
             SafeArea(
@@ -67,37 +69,53 @@ class _SplashViewState extends State<SplashView>
                     const Spacer(),
                     const Emblem(size: 144),
                     const SizedBox(height: 28),
-                    Text(s.sylhetDistrict.toUpperCase(),
-                        style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 2.7,
-                            color: AppColors.gold)),
+                    Text(
+                      s.sylhetDistrict.toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 2.7,
+                        color: AppColors.gold,
+                      ),
+                    ),
                     const SizedBox(height: 6),
-                    Text(s.associationName,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            fontSize: 34,
-                            height: 1.1,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white)),
+                    Text(
+                      s.associationName,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 34,
+                        height: 1.1,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      ),
+                    ),
                     const SizedBox(height: 16),
                     Container(
-                        width: 48,
-                        height: 3,
-                        decoration: BoxDecoration(
-                            color: AppColors.gold,
-                            borderRadius: BorderRadius.circular(2))),
+                      width: 48,
+                      height: 3,
+                      decoration: BoxDecoration(
+                        color: AppColors.gold,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
                     const SizedBox(height: 16),
-                    Text(s.tagline,
-                        style: const TextStyle(
-                            fontSize: 16, color: AppColors.textOnNavyMuted)),
+                    Text(
+                      s.tagline,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: AppColors.textOnNavyMuted,
+                      ),
+                    ),
                     const Spacer(flex: 2),
                     _LoadingBar(animation: _bar),
                     const SizedBox(height: 14),
-                    Text(s.location,
-                        style: const TextStyle(
-                            fontSize: 14, color: AppColors.textOnNavyMuted)),
+                    Text(
+                      s.location,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppColors.textOnNavyMuted,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -115,13 +133,13 @@ class _Ring extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
-        ),
-      );
+    width: size,
+    height: size,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+    ),
+  );
 }
 
 class _LoadingBar extends StatelessWidget {

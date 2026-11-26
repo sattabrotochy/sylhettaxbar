@@ -7,8 +7,8 @@ import '../../domain/repositories/settings_repository.dart';
 /// App-wide settings: language and onboarding state.
 class SettingsViewModel extends ChangeNotifier {
   SettingsViewModel(this._repository)
-      : _language = _repository.getLanguage(),
-        _onboardingDone = _repository.isOnboardingDone();
+    : _language = _repository.getLanguage(),
+      _onboardingDone = _repository.isOnboardingDone();
 
   final SettingsRepository _repository;
 
