@@ -31,24 +31,32 @@ class NoticeTile extends StatelessWidget {
               width: 54,
               padding: const EdgeInsets.symmetric(vertical: 8),
               decoration: BoxDecoration(
-                  color: AppColors.line, borderRadius: BorderRadius.circular(12)),
+                color: AppColors.line,
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: d == null
                     ? const [Icon(AppIcons.notice, color: AppColors.navy)]
                     : [
-                        Text(DateFmt.day(d, l),
-                            style: const TextStyle(
-                                fontSize: 18,
-                                height: 1.1,
-                                fontWeight: FontWeight.w800,
-                                color: AppColors.navy)),
-                        Text(DateFmt.month(d, l),
-                            style: const TextStyle(
-                                fontSize: 12,
-                                height: 1.1,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.navy)),
+                        Text(
+                          DateFmt.day(d, l),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            height: 1.1,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.navy,
+                          ),
+                        ),
+                        Text(
+                          DateFmt.month(d, l),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            height: 1.1,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.navy,
+                          ),
+                        ),
                       ],
               ),
             ),
@@ -64,26 +72,37 @@ class NoticeTile extends StatelessWidget {
                     foreground: isNews ? AppColors.primary : Colors.white,
                   ),
                   const SizedBox(height: 4),
-                  Text(notice.title(l),
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          fontSize: 15,
-                          height: 1.3,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.navy)),
+                  Text(
+                    notice.title(l),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      height: 1.3,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.navy,
+                    ),
+                  ),
                   if (notice.hasAttachment) ...[
                     const SizedBox(height: 4),
-                    Row(children: [
-                      const Icon(AppIcons.attachment,
-                          size: 16, color: AppColors.primary),
-                      const SizedBox(width: 5),
-                      Text(s.pdfAttached,
+                    Row(
+                      children: [
+                        const Icon(
+                          AppIcons.attachment,
+                          size: 16,
+                          color: AppColors.primary,
+                        ),
+                        const SizedBox(width: 5),
+                        Text(
+                          s.pdfAttached,
                           style: const TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.primary)),
-                    ]),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ],
               ),

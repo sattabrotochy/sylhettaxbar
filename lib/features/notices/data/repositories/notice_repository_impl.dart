@@ -9,16 +9,16 @@ class NoticeRepositoryImpl implements NoticeRepository {
 
   @override
   Future<Result<List<Notice>>> getNotices({int limit = 50}) => guard(() async {
-        final list = await _remote.getNotices(limit);
-        list.sort((a, b) {
-          final da = a.date, db = b.date;
-          if (da == null && db == null) return 0;
-          if (da == null) return 1;
-          if (db == null) return -1;
-          return db.compareTo(da);
-        });
-        return list;
-      });
+    final list = await _remote.getNotices(limit);
+    list.sort((a, b) {
+      final da = a.date, db = b.date;
+      if (da == null && db == null) return 0;
+      if (da == null) return 1;
+      if (db == null) return -1;
+      return db.compareTo(da);
+    });
+    return list;
+  });
 
   @override
   Future<Result<Notice>> getNoticeDetails(String id) =>

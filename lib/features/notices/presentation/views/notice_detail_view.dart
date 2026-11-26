@@ -28,10 +28,11 @@ class NoticeDetailView extends StatelessWidget {
             child: switch (vm.status) {
               ViewStatus.initial ||
               ViewStatus.loading ||
-              ViewStatus.empty =>
-                const StateView.loading(),
-              ViewStatus.error =>
-                StateView.error(failure: vm.failure, onRetry: vm.load),
+              ViewStatus.empty => const StateView.loading(),
+              ViewStatus.error => StateView.error(
+                failure: vm.failure,
+                onRetry: vm.load,
+              ),
               ViewStatus.success => _Body(notice: vm.notice!),
             },
           ),
@@ -55,39 +56,58 @@ class _Body extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 18, 20, 32),
       children: [
-        Row(children: [
-          TagBadge(
-            label: isNews ? s.news : s.notice,
-            background: isNews ? AppColors.line : AppColors.primary,
-            foreground: isNews ? AppColors.primary : Colors.white,
-            fontSize: 12,
-          ),
-          const SizedBox(width: 10),
-          if (notice.date != null)
-            Text(DateFmt.full(notice.date, l),
-                style: const TextStyle(fontSize: 14, color: AppColors.textMuted)),
-        ]),
+        Row(
+          children: [
+            TagBadge(
+              label: isNews ? s.news : s.notice,
+              background: isNews ? AppColors.line : AppColors.primary,
+              foreground: isNews ? AppColors.primary : Colors.white,
+              fontSize: 12,
+            ),
+            const SizedBox(width: 10),
+            if (notice.date != null)
+              Text(
+                DateFmt.full(notice.date, l),
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.textMuted,
+                ),
+              ),
+          ],
+        ),
         const SizedBox(height: 10),
-        Text(notice.title(l),
-            style: const TextStyle(
-                fontSize: 24,
-                height: 1.25,
-                fontWeight: FontWeight.w800,
-                color: AppColors.navy)),
+        Text(
+          notice.title(l),
+          style: const TextStyle(
+            fontSize: 24,
+            height: 1.25,
+            fontWeight: FontWeight.w800,
+            color: AppColors.navy,
+          ),
+        ),
         if (notice.endDate != null) ...[
           const SizedBox(height: 6),
-          Text('${s.validUntil}: ${DateFmt.full(notice.endDate, l)}',
-              style: const TextStyle(fontSize: 14, color: AppColors.goldText)),
+          Text(
+            '${s.validUntil}: ${DateFmt.full(notice.endDate, l)}',
+            style: const TextStyle(fontSize: 14, color: AppColors.goldText),
+          ),
         ],
         const SizedBox(height: 16),
         if (body.isNotEmpty)
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(20)),
-            child: SelectableText(body,
-                style: const TextStyle(
-                    fontSize: 16, height: 1.55, color: AppColors.text)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: SelectableText(
+              body,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.55,
+                color: AppColors.text,
+              ),
+            ),
           ),
         if (notice.hasAttachment) ...[
           const SizedBox(height: 16),
@@ -101,7 +121,9 @@ class _Body extends StatelessWidget {
                   imageUrl: notice.attachmentUrl,
                   fit: BoxFit.fitWidth,
                   placeholder: (_, _) => const SizedBox(
-                      height: 200, child: Center(child: CircularProgressIndicator())),
+                    height: 200,
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
                   errorWidget: (_, _, _) => const SizedBox.shrink(),
                 ),
               ),
@@ -116,10 +138,13 @@ class _Body extends StatelessWidget {
               minimumSize: const Size.fromHeight(52),
               foregroundColor: AppColors.primary,
               side: const BorderSide(color: AppColors.primary, width: 1.5),
-              textStyle:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+              textStyle: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
             ),
           ),
         ],

@@ -24,8 +24,10 @@ class NoticeModel {
       endDate: Parse.date(j['bill_end_date']),
       detailsHtmlEn: Parse.str(j['bill_details']),
       detailsHtmlBn: Parse.str(j['bill_details_bn']),
-      attachmentUrl:
-          ApiEndpoints.noticeAttachment(id, Parse.str(j['bill_attachment_ext'])),
+      attachmentUrl: ApiEndpoints.noticeAttachment(
+        id,
+        Parse.str(j['bill_attachment_ext']),
+      ),
     );
   }
 }
