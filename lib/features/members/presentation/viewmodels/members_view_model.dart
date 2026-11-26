@@ -9,7 +9,7 @@ enum MemberFilter { all, golden, freedomFighter, retired }
 
 class MembersViewModel extends BaseViewModel {
   MembersViewModel(this._getMembers, {String initialQuery = ''})
-      : _query = initialQuery;
+    : _query = initialQuery;
 
   final GetMembers _getMembers;
 
@@ -27,14 +27,14 @@ class MembersViewModel extends BaseViewModel {
   bool get hasMore => _members.length < _total;
 
   List<Member> get visibleMembers => _members.where((m) {
-        final passesFilter = switch (_filter) {
-          MemberFilter.all => true,
-          MemberFilter.golden => m.isGolden,
-          MemberFilter.freedomFighter => m.isFreedomFighter,
-          MemberFilter.retired => m.isRetired,
-        };
-        return passesFilter && m.matches(_query);
-      }).toList();
+    final passesFilter = switch (_filter) {
+      MemberFilter.all => true,
+      MemberFilter.golden => m.isGolden,
+      MemberFilter.freedomFighter => m.isFreedomFighter,
+      MemberFilter.retired => m.isRetired,
+    };
+    return passesFilter && m.matches(_query);
+  }).toList();
 
   Future<void> load() async {
     _members.clear();

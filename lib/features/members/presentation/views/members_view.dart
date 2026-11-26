@@ -19,8 +19,9 @@ class MembersView extends StatefulWidget {
 }
 
 class _MembersViewState extends State<MembersView> {
-  late final TextEditingController _search =
-      TextEditingController(text: context.read<MembersViewModel>().query);
+  late final TextEditingController _search = TextEditingController(
+    text: context.read<MembersViewModel>().query,
+  );
   final _scroll = ScrollController();
 
   @override
@@ -59,8 +60,13 @@ class _MembersViewState extends State<MembersView> {
         TitleHeader(
           title: s.members,
           trailing: vm.total > 0
-              ? Text(DateFmt.digits(s.advocatesCount(vm.total), l),
-                  style: const TextStyle(fontSize: 14, color: AppColors.textMuted))
+              ? Text(
+                  DateFmt.digits(s.advocatesCount(vm.total), l),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: AppColors.textMuted,
+                  ),
+                )
               : null,
           bottom: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -73,7 +79,10 @@ class _MembersViewState extends State<MembersView> {
                 decoration: InputDecoration(
                   hintText: s.searchByNameOrNo,
                   hintStyle: const TextStyle(color: AppColors.textMuted),
-                  prefixIcon: const Icon(AppIcons.search, color: AppColors.primary),
+                  prefixIcon: const Icon(
+                    AppIcons.search,
+                    color: AppColors.primary,
+                  ),
                   suffixIcon: vm.query.isEmpty
                       ? null
                       : IconButton(
@@ -124,35 +133,48 @@ class _MembersViewState extends State<MembersView> {
         ),
         Expanded(
           child: switch (vm.status) {
-            ViewStatus.initial || ViewStatus.loading => const StateView.loading(),
-            ViewStatus.error =>
-              StateView.error(failure: vm.failure, onRetry: vm.load),
-            ViewStatus.empty =>
-              StateView.empty(message: s.noMembers, icon: AppIcons.members),
+            ViewStatus.initial ||
+            ViewStatus.loading => const StateView.loading(),
+            ViewStatus.error => StateView.error(
+              failure: vm.failure,
+              onRetry: vm.load,
+            ),
+            ViewStatus.empty => StateView.empty(
+              message: s.noMembers,
+              icon: AppIcons.members,
+            ),
             ViewStatus.success => RefreshIndicator(
-                onRefresh: vm.refresh,
-                child: members.isEmpty && !vm.hasMore
-                    ? ListView(children: [
-                        StateView.empty(message: s.noMembers, icon: AppIcons.search)
-                      ])
-                    : ListView.separated(
-                        controller: _scroll,
-                        padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
-                        itemCount: members.length + (vm.hasMore ? 1 : 0),
-                        separatorBuilder: (_, _) => const SizedBox(height: 10),
-                        itemBuilder: (_, i) => i >= members.length
-                            ? const Padding(
-                                padding: EdgeInsets.all(12),
-                                child: Center(
-                                    child: SizedBox(
-                                        width: 24,
-                                        height: 24,
-                                        child: CircularProgressIndicator(
-                                            strokeWidth: 2.5))),
-                              )
-                            : MemberTile(member: members[i]),
-                      ),
-              ),
+              onRefresh: vm.refresh,
+              child: members.isEmpty && !vm.hasMore
+                  ? ListView(
+                      children: [
+                        StateView.empty(
+                          message: s.noMembers,
+                          icon: AppIcons.search,
+                        ),
+                      ],
+                    )
+                  : ListView.separated(
+                      controller: _scroll,
+                      padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
+                      itemCount: members.length + (vm.hasMore ? 1 : 0),
+                      separatorBuilder: (_, _) => const SizedBox(height: 10),
+                      itemBuilder: (_, i) => i >= members.length
+                          ? const Padding(
+                              padding: EdgeInsets.all(12),
+                              child: Center(
+                                child: SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2.5,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : MemberTile(member: members[i]),
+                    ),
+            ),
           },
         ),
       ],
@@ -179,18 +201,26 @@ class MemberTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(member.name(l),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                        fontSize: 16,
-                        height: 1.35,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.navy)),
+                Text(
+                  member.name(l),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    height: 1.35,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.navy,
+                  ),
+                ),
                 if (member.memberNo.isNotEmpty)
-                  Text(DateFmt.digits(s.memberNo(member.memberNo), l),
-                      style: const TextStyle(
-                          fontSize: 13, height: 1.35, color: AppColors.textMuted)),
+                  Text(
+                    DateFmt.digits(s.memberNo(member.memberNo), l),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      height: 1.35,
+                      color: AppColors.textMuted,
+                    ),
+                  ),
               ],
             ),
           ),
@@ -199,9 +229,10 @@ class MemberTile extends StatelessWidget {
             const SizedBox(width: 6),
           ] else if (member.isFreedomFighter) ...[
             TagBadge(
-                label: s.freedomFighter,
-                background: AppColors.line,
-                foreground: AppColors.primary),
+              label: s.freedomFighter,
+              background: AppColors.line,
+              foreground: AppColors.primary,
+            ),
             const SizedBox(width: 6),
           ],
           const Icon(AppIcons.chevronRight, color: AppColors.textMuted),

@@ -18,30 +18,42 @@ class MoreView extends StatelessWidget {
     final s = context.strings;
     final version = context.watch<AppInfoViewModel>().info?.versionCode;
 
-    void comingSoon() => ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(s.comingSoon)));
-
     final groups = <(String, List<(IconData, String, VoidCallback)>)>[
-      (s.groupAbout, [
-        (AppIcons.info, s.aboutUs, () => context.push(AppRoutes.about)),
-        (AppIcons.history, s.history, comingSoon),
-        (AppIcons.book, s.constitution, comingSoon),
-      ]),
-      (s.groupPeople, [
-        (AppIcons.committee, s.committee, () => context.push(AppRoutes.committee)),
-        (AppIcons.election, s.election, () => context.push(AppRoutes.election)),
-        (AppIcons.staff, s.staff, () => context.push(AppRoutes.staff)),
-      ]),
-      (s.groupMore, [
-        (AppIcons.gallery, s.gallery, () => context.push(AppRoutes.gallery)),
-        (AppIcons.phone, s.contactUs, () => context.push(AppRoutes.contact)),
-        (AppIcons.shield, s.privacyPolicy, () => context.push(AppRoutes.privacy)),
-        (
-          AppIcons.link,
-          s.sylhetDistrictBar,
-          () => Launcher.web(context, AppConfig.districtBarUrl, s.couldNotOpen)
-        ),
-      ]),
+      (
+        s.groupAbout,
+        [
+          (AppIcons.info, s.aboutUs, () => context.push(AppRoutes.about)),
+          (AppIcons.history, s.history, () => context.push(AppRoutes.history)),
+          (
+            AppIcons.book,
+            s.constitution,
+            () => context.push(AppRoutes.constitution),
+          ),
+        ],
+      ),
+      (
+        s.groupPeople,
+        [
+          (
+            AppIcons.committee,
+            s.committee,
+            () => context.push(AppRoutes.committee),
+          ),
+          (AppIcons.staff, s.staff, () => context.push(AppRoutes.staff)),
+        ],
+      ),
+      (
+        s.groupMore,
+        [
+          (AppIcons.gallery, s.gallery, () => context.push(AppRoutes.gallery)),
+          (AppIcons.phone, s.contactUs, () => context.push(AppRoutes.contact)),
+          (
+            AppIcons.shield,
+            s.privacyPolicy,
+            () => context.push(AppRoutes.privacy),
+          ),
+        ],
+      ),
     ];
 
     return Column(
@@ -59,8 +71,9 @@ class MoreView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(18)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                  ),
                   child: Column(
                     children: [
                       for (final (i, (icon, label, onTap)) in rows.indexed)
@@ -78,10 +91,14 @@ class MoreView extends StatelessWidget {
               if (version != null && version.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Text(s.appVersion(version),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 13, color: AppColors.textMuted)),
+                  child: Text(
+                    s.appVersion(version),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: AppColors.textMuted,
+                    ),
+                  ),
                 ),
             ],
           ),
@@ -123,17 +140,22 @@ class MenuRow extends StatelessWidget {
                 width: 34,
                 height: 34,
                 decoration: BoxDecoration(
-                    color: AppColors.line, borderRadius: BorderRadius.circular(10)),
+                  color: AppColors.line,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Icon(icon, size: 18, color: AppColors.primary),
               ),
               const SizedBox(width: 12),
             ],
             Expanded(
-              child: Text(label,
-                  style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.navy)),
+              child: Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.navy,
+                ),
+              ),
             ),
             const Icon(AppIcons.chevronRight, color: AppColors.textMuted),
           ],

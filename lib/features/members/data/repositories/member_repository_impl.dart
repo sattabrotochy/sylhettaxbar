@@ -11,14 +11,16 @@ class MemberRepositoryImpl implements MemberRepository {
   final Map<String, Member> _cache = {};
 
   @override
-  Future<Result<MembersPage>> getMembers({required int page, required int limit}) =>
-      guard(() async {
-        final result = await _remote.getMembers(page: page, limit: limit);
-        for (final m in result.members) {
-          _cache[m.id] = m;
-        }
-        return result;
-      });
+  Future<Result<MembersPage>> getMembers({
+    required int page,
+    required int limit,
+  }) => guard(() async {
+    final result = await _remote.getMembers(page: page, limit: limit);
+    for (final m in result.members) {
+      _cache[m.id] = m;
+    }
+    return result;
+  });
 
   @override
   Future<Result<Member>> getMemberDetails(String id) async {
