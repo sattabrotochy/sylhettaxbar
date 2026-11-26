@@ -41,16 +41,20 @@ class CommitteeView extends StatelessWidget {
           ),
           Expanded(
             child: switch (vm.status) {
-              ViewStatus.initial || ViewStatus.loading =>
-                const StateView.loading(),
-              ViewStatus.error =>
-                StateView.error(failure: vm.failure, onRetry: vm.load),
+              ViewStatus.initial ||
+              ViewStatus.loading => const StateView.loading(),
+              ViewStatus.error => StateView.error(
+                failure: vm.failure,
+                onRetry: vm.load,
+              ),
               ViewStatus.empty => StateView.empty(
-                  message: s.noCommittee, icon: AppIcons.committee),
+                message: s.noCommittee,
+                icon: AppIcons.committee,
+              ),
               ViewStatus.success => RefreshIndicator(
-                  onRefresh: vm.load,
-                  child: const _CommitteeBody(),
-                ),
+                onRefresh: vm.load,
+                child: const _CommitteeBody(),
+              ),
             },
           ),
         ],
@@ -90,9 +94,11 @@ class _CommitteeBody extends StatelessWidget {
           ),
           const SizedBox(height: 16),
         ],
-        Eyebrow(selected == null
-            ? s.executiveCommittee
-            : '${s.executiveCommittee} · ${selected.name}'),
+        Eyebrow(
+          selected == null
+              ? s.executiveCommittee
+              : '${s.executiveCommittee} · ${selected.name}',
+        ),
         const SizedBox(height: 14),
         if (vm.membersLoading)
           const StateView.loading()
@@ -119,7 +125,9 @@ class _CommitteeBody extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Column(
                 children: [
                   for (final (i, m) in vm.others.indexed)
@@ -168,15 +176,18 @@ class _LeaderCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text(member.name(l),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                  fontSize: 15,
-                  height: 1.25,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white)),
+          Text(
+            member.name(l),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 15,
+              height: 1.25,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
           const SizedBox(height: 8),
           TagBadge(label: member.designation(l), fontSize: 12),
         ],
@@ -210,15 +221,23 @@ class _MemberRow extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(member.name(l),
-                      style: const TextStyle(
-                          fontSize: 15,
-                          height: 1.3,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.navy)),
-                  Text(member.designation(l),
-                      style: const TextStyle(
-                          fontSize: 13, height: 1.3, color: AppColors.textMuted)),
+                  Text(
+                    member.name(l),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      height: 1.3,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.navy,
+                    ),
+                  ),
+                  Text(
+                    member.designation(l),
+                    style: const TextStyle(
+                      fontSize: 13,
+                      height: 1.3,
+                      color: AppColors.textMuted,
+                    ),
+                  ),
                 ],
               ),
             ),

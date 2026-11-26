@@ -21,10 +21,11 @@ class CommitteeRepositoryImpl implements CommitteeRepository {
       });
 
   @override
-  Future<Result<List<CommitteeMember>>> getCommitteeMembers(String committeeId) =>
-      guard(() async {
-        final list = await _remote.getCommitteeMembers(committeeId);
-        list.sort((a, b) => a.priority.compareTo(b.priority));
-        return list;
-      });
+  Future<Result<List<CommitteeMember>>> getCommitteeMembers(
+    String committeeId,
+  ) => guard(() async {
+    final list = await _remote.getCommitteeMembers(committeeId);
+    list.sort((a, b) => a.priority.compareTo(b.priority));
+    return list;
+  });
 }

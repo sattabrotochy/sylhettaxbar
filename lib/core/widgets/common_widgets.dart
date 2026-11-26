@@ -37,7 +37,9 @@ class HeaderIconButton extends StatelessWidget {
     return Tooltip(
       message: tooltip,
       child: Material(
-        color: onDark ? Colors.white.withValues(alpha: 0.08) : AppColors.background,
+        color: onDark
+            ? Colors.white.withValues(alpha: 0.08)
+            : AppColors.background,
         borderRadius: BorderRadius.circular(14),
         child: InkWell(
           borderRadius: BorderRadius.circular(14),
@@ -48,13 +50,19 @@ class HeaderIconButton extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Icon(icon,
-                    size: 22, color: onDark ? Colors.white : AppColors.navy),
+                Icon(
+                  icon,
+                  size: 22,
+                  color: onDark ? Colors.white : AppColors.navy,
+                ),
                 if (badge)
                   const Positioned(
                     top: 10,
                     right: 11,
-                    child: CircleAvatar(radius: 4, backgroundColor: AppColors.gold),
+                    child: CircleAvatar(
+                      radius: 4,
+                      backgroundColor: AppColors.gold,
+                    ),
                   ),
               ],
             ),
@@ -65,7 +73,7 @@ class HeaderIconButton extends StatelessWidget {
   }
 }
 
-/// White top bar with a back button and title (Committee, Election, ...).
+/// White top bar with a back button and title (Committee, Staff, ...).
 class BackHeader extends StatelessWidget implements PreferredSizeWidget {
   const BackHeader({super.key, required this.title, this.bottom});
 
@@ -83,7 +91,11 @@ class BackHeader extends StatelessWidget implements PreferredSizeWidget {
         border: Border(bottom: BorderSide(color: AppColors.line)),
       ),
       padding: EdgeInsets.fromLTRB(
-          20, MediaQuery.paddingOf(context).top + 8, 20, 14),
+        20,
+        MediaQuery.paddingOf(context).top + 8,
+        20,
+        14,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,15 +105,19 @@ class BackHeader extends StatelessWidget implements PreferredSizeWidget {
               HeaderIconButton(
                 icon: AppIcons.back,
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-                onPressed: () => context.canPop() ? context.pop() : context.go('/home'),
+                onPressed: () =>
+                    context.canPop() ? context.pop() : context.go('/home'),
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(title,
-                    style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.navy)),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.navy,
+                  ),
+                ),
               ),
             ],
           ),
@@ -114,7 +130,12 @@ class BackHeader extends StatelessWidget implements PreferredSizeWidget {
 
 /// White top bar with a large title (tab roots: Members, Notices, More).
 class TitleHeader extends StatelessWidget {
-  const TitleHeader({super.key, required this.title, this.trailing, this.bottom});
+  const TitleHeader({
+    super.key,
+    required this.title,
+    this.trailing,
+    this.bottom,
+  });
 
   final String title;
   final Widget? trailing;
@@ -128,7 +149,11 @@ class TitleHeader extends StatelessWidget {
         border: Border(bottom: BorderSide(color: AppColors.line)),
       ),
       padding: EdgeInsets.fromLTRB(
-          20, MediaQuery.paddingOf(context).top + 12, 20, 14),
+        20,
+        MediaQuery.paddingOf(context).top + 12,
+        20,
+        14,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -137,11 +162,14 @@ class TitleHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: Text(title,
-                    style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.navy)),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.navy,
+                  ),
+                ),
               ),
               ?trailing,
             ],
@@ -174,8 +202,10 @@ class PillChip extends StatelessWidget {
       child: Material(
         color: selected ? AppColors.primary : AppColors.surface,
         shape: StadiumBorder(
-            side: BorderSide(
-                color: selected ? AppColors.primary : AppColors.line)),
+          side: BorderSide(
+            color: selected ? AppColors.primary : AppColors.line,
+          ),
+        ),
         child: InkWell(
           customBorder: const StadiumBorder(),
           onTap: onTap,
@@ -183,11 +213,14 @@ class PillChip extends StatelessWidget {
             constraints: const BoxConstraints(minHeight: 38),
             padding: const EdgeInsets.symmetric(horizontal: 14),
             alignment: Alignment.center,
-            child: Text(label,
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: selected ? Colors.white : AppColors.textMuted)),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: selected ? Colors.white : AppColors.textMuted,
+              ),
+            ),
           ),
         ),
       ),
@@ -227,11 +260,14 @@ class LanguageToggle extends StatelessWidget {
                   color: on ? AppColors.primary : Colors.transparent,
                   borderRadius: BorderRadius.circular(999),
                 ),
-                child: Text(l.label,
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: on ? Colors.white : AppColors.textMuted)),
+                child: Text(
+                  l.label,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: on ? Colors.white : AppColors.textMuted,
+                  ),
+                ),
               ),
             ),
           );
@@ -261,13 +297,18 @@ class TagBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 2),
       decoration: BoxDecoration(
-          color: background, borderRadius: BorderRadius.circular(999)),
-      child: Text(label,
-          style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.w700,
-              color: foreground,
-              height: 1.4)),
+        color: background,
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.w700,
+          color: foreground,
+          height: 1.4,
+        ),
+      ),
     );
   }
 }
@@ -343,13 +384,17 @@ class AppLogo extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration:
-          const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-      child: Image.asset(asset,
-          width: size,
-          height: size,
-          semanticLabel: 'Sylhet District Taxes Bar Association',
-          cacheWidth: (size * 3).round()),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+      ),
+      child: Image.asset(
+        asset,
+        width: size,
+        height: size,
+        semanticLabel: 'Sylhet District Taxes Bar Association',
+        cacheWidth: (size * 3).round(),
+      ),
     );
   }
 }
@@ -377,7 +422,9 @@ class AppCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(radius),
-      side: bordered ? const BorderSide(color: AppColors.line) : BorderSide.none,
+      side: bordered
+          ? const BorderSide(color: AppColors.line)
+          : BorderSide.none,
     );
     return Material(
       color: color,
@@ -404,11 +451,14 @@ class SectionTitle extends StatelessWidget {
         Expanded(
           child: Semantics(
             header: true,
-            child: Text(text,
-                style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.navy)),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+                color: AppColors.navy,
+              ),
+            ),
           ),
         ),
         ?trailing,
@@ -424,33 +474,36 @@ class Eyebrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text.toUpperCase(),
-        style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 1.3,
-            color: AppColors.goldText));
+    return Text(
+      text.toUpperCase(),
+      style: const TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 1.3,
+        color: AppColors.goldText,
+      ),
+    );
   }
 }
 
 /// Loading / error / empty placeholder used by every list screen.
 class StateView extends StatelessWidget {
   const StateView.loading({super.key})
-      : _kind = _Kind.loading,
-        message = null,
-        failure = null,
-        onRetry = null,
-        icon = null;
+    : _kind = _Kind.loading,
+      message = null,
+      failure = null,
+      onRetry = null,
+      icon = null;
 
   const StateView.empty({super.key, required String this.message, this.icon})
-      : _kind = _Kind.empty,
-        failure = null,
-        onRetry = null;
+    : _kind = _Kind.empty,
+      failure = null,
+      onRetry = null;
 
   const StateView.error({super.key, this.failure, required this.onRetry})
-      : _kind = _Kind.error,
-        message = null,
-        icon = null;
+    : _kind = _Kind.error,
+      message = null,
+      icon = null;
 
   final _Kind _kind;
   final String? message;
@@ -474,7 +527,9 @@ class StateView extends StatelessWidget {
       case _Kind.error:
         final isNetwork = failure is NetworkFailure;
         return _Message(
-          icon: isNetwork ? Icons.wifi_off_rounded : Icons.error_outline_rounded,
+          icon: isNetwork
+              ? Icons.wifi_off_rounded
+              : Icons.error_outline_rounded,
           title: s.somethingWentWrong,
           subtitle: isNetwork ? s.noInternet : failure?.message,
           action: FilledButton(
@@ -483,7 +538,8 @@ class StateView extends StatelessWidget {
               backgroundColor: AppColors.primary,
               minimumSize: const Size(140, 48),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14)),
+                borderRadius: BorderRadius.circular(14),
+              ),
             ),
             child: Text(s.retry),
           ),
@@ -495,7 +551,12 @@ class StateView extends StatelessWidget {
 enum _Kind { loading, empty, error }
 
 class _Message extends StatelessWidget {
-  const _Message({required this.icon, required this.title, this.subtitle, this.action});
+  const _Message({
+    required this.icon,
+    required this.title,
+    this.subtitle,
+    this.action,
+  });
   final IconData icon;
   final String title;
   final String? subtitle;
@@ -513,21 +574,31 @@ class _Message extends StatelessWidget {
               width: 64,
               height: 64,
               decoration: BoxDecoration(
-                  color: AppColors.line, borderRadius: BorderRadius.circular(20)),
+                color: AppColors.line,
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Icon(icon, color: AppColors.primary, size: 30),
             ),
             const SizedBox(height: 14),
-            Text(title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.navy)),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: AppColors.navy,
+              ),
+            ),
             if (subtitle != null && subtitle!.isNotEmpty) ...[
               const SizedBox(height: 4),
-              Text(subtitle!,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 14, color: AppColors.textMuted)),
+              Text(
+                subtitle!,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.textMuted,
+                ),
+              ),
             ],
             if (action != null) ...[const SizedBox(height: 16), action!],
           ],
